@@ -26,4 +26,8 @@ export class MembersService {
     return this.http.put<Member>(url,member)  
   }
 
+  createMember(formData: FormData):Observable<Member>{
+    return this.http.post<Member>(this.url, formData);
+  }
+
 }
