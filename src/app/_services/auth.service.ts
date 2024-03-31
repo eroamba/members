@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject,tap } from 'rxjs';
 
 import { User } from '../_interfaces/auth';
 import { Token } from '../_interfaces/token';
@@ -11,14 +11,28 @@ import { Token } from '../_interfaces/token';
 })
 export class AuthService {
 
-  url = "http://flp-api.francecentral.cloudapp.azure.com/auth/login"
+  private _user: BehaviorSubject<any | null> = new BehaviorSubject(null);
+
+  url= "https://preprod-api.wilyz.com/api/auth/login"
 
   constructor(
     private httpClient: HttpClient,
   ) { }
 
 
-  login(credentials:User):Observable<Token>{
-    return this.httpClient.post<Token>(this.url, credentials);
+  get user$(): Observable<any>
+    {
+        return this._user.asObservable();
+    }
+
+  login(credentials:User):Observable<any>{
+    return this.httpClient.post<any>(this.url, credentials).pipe(tap((response: any) =>
+    {
+        this._user.next(response);
+        console.log(response);
+    }))
   }
+
+
+
 }

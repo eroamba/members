@@ -9,17 +9,22 @@ import { ListComponent } from './list/list.component';
 import { FormsModule } from '@angular/forms';
 
 
+import { MatIconModule } from '@angular/material/icon';
+
+
 @NgModule({
   declarations: [
     AddComponent,
     EditComponent,
     DeleteComponent,
-    ListComponent
+    ListComponent,
+ 
   ],
   imports: [
     CommonModule,
     MemberRoutingModule,
-    FormsModule
+    FormsModule,
+    MatIconModule,
   ]
 })
 export class MemberModule { }

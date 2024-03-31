@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { User } from '../../_interfaces/auth';
-import { Token } from '../../_interfaces/token';
+import { Token, } from '../../_interfaces/token';
 import { AuthService } from '../../_services/auth.service';
 import { TokenService } from '../../_services/token.service';
 
@@ -32,12 +32,13 @@ export class LoginComponent implements OnInit {
     
     this.authService.login(registerForm!.value).subscribe(
       (data:Token) => {
-        console.log(data.access_token)
-        this.tokenService.saveToken(data.access_token)
+        console.log(data.token)
+        this.tokenService.saveToken(data.token)
       },
       (error:any) => console.log(error)
     );
     
   }
+  
 
 }

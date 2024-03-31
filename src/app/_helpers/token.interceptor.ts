@@ -22,7 +22,7 @@ export class TokenInterceptor implements HttpInterceptor {
     const token = this.tokenService.getToken();
     if(token !== null){
       let clone = request.clone({
-        headers: request.headers.set('Authorization', 'bearer ' + token)
+        headers: request.headers.set('Authorization', 'Bearer ' + token)
       })
       console.log(clone)
       return next.handle(clone).pipe(
